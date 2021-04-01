@@ -1,8 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "g2L7GMo4kNZ6k0j4wyYTA4MXKbCzhA5UxnaOyIyDfKfXasiUBGLMxVyjbvx9ZgR4SDDmnHU8ewFQkx45GDrs4w==",
+  "dgSpecHash": "69q0pEgsAawD+Q3Cy3LPxJ4GyS3M6ubzDXXBKA04I4Ky8O/O4RbbTUO7OSYmj0dUUH5SC84Cl6iQnyutQ7QEcQ==",
   "success": true,
   "projectFilePath": "D:\\Personal\\OOP-tutorial\\OOP-tutorial\\OOP-tutorial\\OOP-tutorial.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "C:\\Users\\Carmela Manalo\\.nuget\\packages\\mvvmlightlibs\\5.4.1.1\\mvvmlightlibs.5.4.1.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MvvmLightLibs 5.4.1.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "MvvmLightLibs",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }
