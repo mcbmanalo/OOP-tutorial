@@ -6,10 +6,10 @@ namespace OOP_tutorial.Classes
 {
     public class Jewelry : Thing
     {
-        public Jewelry(string name, string itemId, double value, Rarity rarity, MaterialType materialType) 
-            : base(name, itemId, value)
+        public Jewelry(string name, string itemId, Rarity rarity, MaterialType materialType) 
         {
-            ItemId = "J-" + value;
+            Name = name;
+            ItemId = "J-" + itemId;
             JRarity = rarity;
             JMaterialType = materialType;
             Value = getMaterialValue(materialType) * getRarityValue(rarity);

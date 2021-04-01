@@ -4,15 +4,8 @@ using System.Text;
 
 namespace OOP_tutorial
 {
-    public class Thing
+    public abstract class Thing
     {
-        public Thing(string name, string itemId, double value)
-        {
-            Name = name;
-            ItemId = itemId;
-            Value = value;
-        }
-
         private string _name;
         private string _itemId;
         private double _value;

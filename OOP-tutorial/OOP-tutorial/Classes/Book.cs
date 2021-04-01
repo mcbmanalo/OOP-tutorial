@@ -6,10 +6,10 @@ namespace OOP_tutorial.Classes
 {
     public class Book : Thing
     {
-        public Book(string name, string itemId, double value, string title, string author, int numberOfPages) 
-            : base(name, itemId, value)
+        public Book(string name, string itemId, string title, string author, int numberOfPages)
         {
-            ItemId = "B-" + value;
+            Name = name;
+            ItemId = "B-" + itemId;
             Title = title;
             Author = author;
             NumberOfPages = numberOfPages;

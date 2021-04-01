@@ -6,10 +6,10 @@ namespace OOP_tutorial.Classes
 {
     public class Souvenir : Thing
     {
-        public Souvenir(string name, string itemId, double value, string model, MaterialType materialType, string countryOfOrigin) 
-            : base(name, itemId, value)
+        public Souvenir(string name, string itemId, string model, MaterialType materialType, string countryOfOrigin) 
         {
-            ItemId = "S-" + value;
+            Name = name;
+            ItemId = "S-" + itemId;
             Model = model;
             SMaterialType = materialType;
             CountryOfOrigin = countryOfOrigin;
