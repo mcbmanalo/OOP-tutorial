@@ -173,6 +173,10 @@ namespace OOP_tutorial.Modules
                 {
                     All = true;
                 }
+                if(!All)
+                {
+                    SwitchSortingAndGroupingFalse();
+                }
             }
         }
 
@@ -487,6 +491,14 @@ namespace OOP_tutorial.Modules
             var temp = SortedThings;
             DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.ItemId).SelectMany(t => t).ToList());
             RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void SwitchSortingAndGroupingFalse()
+        {
+            IsAscending = false;
+            IsGroupByItemId = false;
+            IsGroupByName = false;
+            IsGroupByValue = false;
         }
 
         private void AddThings()
