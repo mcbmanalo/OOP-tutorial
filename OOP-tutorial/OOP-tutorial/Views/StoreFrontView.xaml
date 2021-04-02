@@ -11,7 +11,9 @@
             <TabItem Header="Store">
                 <local:StoreView></local:StoreView>
             </TabItem>
-            <TabItem Header="Add new item"></TabItem>
+            <TabItem Header="Add new item">
+                <local:AddThingView></local:AddThingView>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
