@@ -445,12 +445,12 @@ namespace OOP_tutorial.Modules
         {
             if (stringFilter != null)
             {
-                DisplayThings = new ObservableCollection<Thing>(FilteredThings.Where(
-                s => (s.Name.Contains(stringFilter) || s.Value.ToString().Contains(stringFilter))));
+                DisplayThings = new ObservableCollection<Thing>(SortedThings.Where(
+                s => (s.Name.Contains(stringFilter) || s.ItemId.Contains(stringFilter) ||s.Value.ToString().Contains(stringFilter))));
             }
             else
             {
-                DisplayThings = FilteredThings;
+                DisplayThings = SortedThings;
             }
             RaisePropertyChanged(nameof(DisplayThings));
         }
