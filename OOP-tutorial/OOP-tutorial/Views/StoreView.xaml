@@ -60,12 +60,32 @@
                 <TextBox Text="{Binding Path=SearchThing, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
         </StackPanel>
+
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="1" 
+                    Grid.RowSpan="4"
+                    Margin="10"
+                    DataContext="{Binding Path=SelectedThing, UpdateSourceTrigger=PropertyChanged}">
+            <StackPanel>
+                <TextBlock Text="Name"></TextBlock>
+                <TextBlock Text="{Binding Path=Name}"></TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Item ID"></TextBlock>
+                <TextBlock Text="{Binding Path=ItemId}"></TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Value"></TextBlock>
+                <TextBlock Text="{Binding Path=Value}"></TextBlock>
+            </StackPanel>
+        </StackPanel>
         
         <ListBox Grid.Row="1"
                  Grid.Column="0"
                  Grid.RowSpan="4"
                  Margin="10"
-                 ItemsSource="{Binding Path=DisplayThings, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged">
+                 ItemsSource="{Binding Path=DisplayThings, UpdateSourceTrigger=PropertyChanged}"
+                 SelectedItem="{Binding Path=SelectedThing, UpdateSourceTrigger=PropertyChanged}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Name}"></TextBlock>

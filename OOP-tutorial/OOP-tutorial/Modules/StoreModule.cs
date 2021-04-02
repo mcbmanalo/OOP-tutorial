@@ -53,6 +53,7 @@ namespace OOP_tutorial.Modules
         private bool _groupByName;
         private bool _groupByItemId;
         private bool _groupByValue;
+        private Thing _selectedThing;
         #endregion
 
         #region Properties
@@ -305,6 +306,16 @@ namespace OOP_tutorial.Modules
                     IsGroupByItemId = false;
                     IsGroupByName = false;
                 }
+            }
+        }
+
+        public Thing SelectedThing
+        {
+            get { return _selectedThing; }
+            set
+            {
+                _selectedThing = value;
+                RaisePropertyChanged(nameof(SelectedThing));
             }
         }
 
