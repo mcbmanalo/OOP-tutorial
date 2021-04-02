@@ -56,7 +56,7 @@
                     <TextBox Text="{Binding Path=OriginCountry, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
             </StackPanel>
-            
+
             <StackPanel x:Name="Jewelry_Stack"
                         Visibility="{Binding Path=SelectedThingType, Converter={StaticResource ThingTypeConverter}, ConverterParameter=Jewelry}">
                 <StackPanel>
@@ -71,6 +71,10 @@
                           SelectedItem="{Binding Path=SelectedJMaterialTypes, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
                 </StackPanel>
             </StackPanel>
+
+            <Button Content="Add Thing"
+                    Margin="10"
+                    Command="{Binding Path=AddThingCommand}"></Button>
         </StackPanel>
     </Grid>
 </UserControl>
