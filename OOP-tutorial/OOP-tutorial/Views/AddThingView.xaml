@@ -12,60 +12,63 @@
             <StackPanel>
                 <TextBlock Text="Type of Thing to Add"></TextBlock>
                 <ComboBox ItemsSource="{Binding Path=ThingTypes}"
-                          SelectedItem="{Binding Path=SelectedThingType}"></ComboBox>
+                          SelectedItem="{Binding Path=SelectedThingType, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Name"></TextBlock>
-                <TextBox Text="{Binding Path=Name}"></TextBox>
+                <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
 
-            <StackPanel x:Name="Book_Stack">
+            <StackPanel x:Name="Book_Stack"
+                        Visibility="{Binding Path=SelectedThingType, Converter={StaticResource ThingTypeConverter}, ConverterParameter=Book}">
                 <StackPanel>
                     <TextBlock Text="Title"></TextBlock>
-                    <TextBox Text="{Binding Path=Title}"></TextBox>
+                    <TextBox Text="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock Text="Author"></TextBlock>
-                    <TextBox Text="{Binding Path=Author}"></TextBox>
+                    <TextBox Text="{Binding Path=Author, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock Text="Number of Pages"></TextBlock>
-                    <TextBox Text="{Binding Path=NumberOfPages}"></TextBox>
+                    <TextBox Text="{Binding Path=NumberOfPages, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
             </StackPanel>
             
-            <StackPanel x:Name="Souvenir_Stack">
+            <StackPanel x:Name="Souvenir_Stack"
+                        Visibility="{Binding Path=SelectedThingType, Converter={StaticResource ThingTypeConverter}, ConverterParameter=Souvenir}">
                 <StackPanel>
                     <TextBlock Text="Model"></TextBlock>
-                    <TextBox Text="{Binding Path=Model}"></TextBox>
+                    <TextBox Text="{Binding Path=Model, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock Text="Material Type"></TextBlock>
                     <ComboBox ItemsSource="{Binding Path=SMaterialTypes}"
-                          SelectedItem="{Binding Path=SelectedSMaterialTypes}"></ComboBox>
+                          SelectedItem="{Binding Path=SelectedSMaterialTypes, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock Text="Country of Origin"></TextBlock>
-                    <TextBox Text="{Binding Path=OriginCountry}"></TextBox>
+                    <TextBox Text="{Binding Path=OriginCountry, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
             </StackPanel>
             
-            <StackPanel x:Name="Jewelry_Stack">
+            <StackPanel x:Name="Jewelry_Stack"
+                        Visibility="{Binding Path=SelectedThingType, Converter={StaticResource ThingTypeConverter}, ConverterParameter=Jewelry}">
                 <StackPanel>
                     <TextBlock Text="Rarity"></TextBlock>
                     <ComboBox ItemsSource="{Binding Path=Rarities}"
-                          SelectedItem="{Binding Path=SelectedRarities}"></ComboBox>
+                          SelectedItem="{Binding Path=SelectedRarities, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock Text="Material Type"></TextBlock>
                     <ComboBox ItemsSource="{Binding Path=JMaterialTypes}"
-                          SelectedItem="{Binding Path=SelectedJMaterialTypes}"></ComboBox>
+                          SelectedItem="{Binding Path=SelectedJMaterialTypes, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
