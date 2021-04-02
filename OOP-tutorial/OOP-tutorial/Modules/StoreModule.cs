@@ -38,6 +38,15 @@ namespace OOP_tutorial.Modules
             RaisePropertyChanged(nameof(Things));
         }
 
+        public string[] ThingTypes => Enum.GetNames(typeof(ThingType));
+
+        private enum ThingType
+        {
+            Book,
+            Souvenir,
+            Jewelry
+        }
+
         private string GetThingsCountString()
         {
             return Things.Count.ToString();
