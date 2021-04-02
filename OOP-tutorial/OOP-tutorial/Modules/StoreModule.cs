@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using OOP_tutorial.Classes;
+using System.Windows;
 
 namespace OOP_tutorial.Modules
 {
@@ -144,6 +145,38 @@ namespace OOP_tutorial.Modules
             return Things.Count.ToString();
         }
 
+        public void AddThing()
+        {
+            if (SelectedThingType == "Book")
+            { 
+                if (Name!= null && Title != null && Author != null && NumberOfPages != 0)
+                {
+                    AddBook(Name, Title, Author, NumberOfPages);
+                    ClearProperties();
+                    MessageBox.Show("Succesfully added Book.");
+                }
+                else
+                {
+                    MessageBox.Show("There are some missing values. Please check if your values.");
+                }
+            }
+            else if (SelectedThingType == "Souvenir")
+            {
+                if (Name != null && Model != null && SelectedSMaterialTypes != null && OriginCountry != null)
+                {
+                    AddSouvenir(Name, Model, SelectedSMaterialTypes, OriginCountry);
+                    ClearProperties();
+                    MessageBox.Show("Succesfully added Book.");
+                }
+                else
+                {
+                    MessageBox.Show("There are some missing values. Please check if your values.");
+                }
+            }
+            else if (SelectedThingType == "Jewelry")
+            { }
+        }
+
         private void AddBook(string name, string title, string author, int numberOfPages)
         {
 
@@ -152,18 +185,32 @@ namespace OOP_tutorial.Modules
             RaisePropertyChanged(nameof(Things));
         }
 
-        private void AddSouvenir(string name, string model, Souvenir.MaterialType materialType, string originCountry)
+        private void AddSouvenir(string name, string model, string materialType, string originCountry)
         {
             Souvenir newSouvenir = new Souvenir(name, GetThingsCountString(), model, materialType, originCountry);
             Things.Add(newSouvenir);
             RaisePropertyChanged(nameof(Things));
         }
 
-        private void AddJewelry(string name, Jewelry.Rarity rarity, Jewelry.MaterialType materialType)
+        private void AddJewelry(string name, string rarity, string materialType)
         {
             Jewelry newJewelry = new Jewelry(name, GetThingsCountString(), rarity, materialType);
             Things.Add(newJewelry);
             RaisePropertyChanged(nameof(Things));
+        }
+
+        private void ClearProperties()
+        {
+            Name = null;
+            Title = null;
+            Author = null;
+            NumberOfPages = 0;
+            Model = null;
+            OriginCountry = null;
+            SelectedSMaterialTypes = null;
+            SelectedRarities = null;
+            SelectedJMaterialTypes = null;
+            SelectedThingType = null;
         }
 
         private void AddThings()
@@ -171,8 +218,8 @@ namespace OOP_tutorial.Modules
             for (int i = 0; i < 10; i++)
             {
                 Things.Add(new Book("Book-"+i.ToString(), i.ToString(), "ASTRO Things", "Carmela Manalo", 200));
-                Things.Add(new Souvenir("Souvenir-"+i.ToString(), i.ToString(), "Model "+i.ToString(), Souvenir.MaterialType.Plastic, "Philippines"));
-                Things.Add(new Jewelry("Jewelry-"+i.ToString(), i.ToString(), Jewelry.Rarity.Common, Jewelry.MaterialType.Bronze));
+                Things.Add(new Souvenir("Souvenir-"+i.ToString(), i.ToString(), "Model "+i.ToString(), Souvenir.MaterialType.Plastic.ToString(), "Philippines"));
+                Things.Add(new Jewelry("Jewelry-"+i.ToString(), i.ToString(), Jewelry.Rarity.Common.ToString(), Jewelry.MaterialType.Bronze.ToString()));
             }
         }
     }
