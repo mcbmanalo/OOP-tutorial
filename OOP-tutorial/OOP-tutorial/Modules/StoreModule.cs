@@ -26,6 +26,7 @@ namespace OOP_tutorial.Modules
 
         public ICommand AddThingCommand => new RelayCommand(AddThing);
 
+        #region Fields
         private string _selectedThingType;
         private string _selectedSMaterialTypes;
         private string _selectedRarities;
@@ -36,6 +37,13 @@ namespace OOP_tutorial.Modules
         private int _numberOfPages;
         private string _model;
         private string _originCountry;
+        private bool _all;
+        private bool _book;
+        private bool _souvenir;
+        private bool _jewelry;
+        #endregion
+
+        #region Properties
 
         public string SelectedThingType
         {
@@ -136,6 +144,50 @@ namespace OOP_tutorial.Modules
                 RaisePropertyChanged(nameof(OriginCountry));
             }
         }
+
+        public bool All
+        {
+            get { return _all; }
+            set
+            {
+                _all = value;
+                RaisePropertyChanged(nameof(All));
+                if (_all)
+                { Book = false; Souvenir = false; Jewelry = false; }
+            }
+        }
+
+        public bool Book
+        {
+            get { return _book; }
+            set
+            {
+                _book = value;
+                RaisePropertyChanged(nameof(Book));
+            }
+        }
+
+        public bool Souvenir
+        {
+            get { return _souvenir; }
+            set
+            {
+                _souvenir = value;
+                RaisePropertyChanged(nameof(Souvenir));
+            }
+        }
+
+        public bool Jewelry
+        {
+            get { return _jewelry; }
+            set
+            {
+                _jewelry = value;
+                RaisePropertyChanged(nameof(Jewelry));
+            }
+        }
+
+        #endregion
 
         private enum ThingType
         {
