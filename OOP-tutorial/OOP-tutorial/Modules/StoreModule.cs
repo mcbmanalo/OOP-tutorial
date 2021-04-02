@@ -16,40 +16,41 @@ namespace OOP_tutorial.Modules
             AddThings();
         }
 
+        private void AddBook(string name, string title, string author, int numberOfPages)
+        {
+            
+            Book newBook = new Book(name, GetThingsCountString(), title, author, numberOfPages);
+            Things.Add(newBook);
+            RaisePropertyChanged(nameof(Things));
+        }
+
+        private void AddSouvenir(string name, string model, Souvenir.MaterialType materialType, string originCountry)
+        {
+            Souvenir newSouvenir = new Souvenir(name, GetThingsCountString(), model, materialType, originCountry);
+            Things.Add(newSouvenir);
+            RaisePropertyChanged(nameof(Things));
+        }
+
+        private void AddJewelry(string name, Jewelry.Rarity rarity, Jewelry.MaterialType materialType)
+        {
+            Jewelry newJewelry = new Jewelry(name, GetThingsCountString(), rarity, materialType);
+            Things.Add(newJewelry);
+            RaisePropertyChanged(nameof(Things));
+        }
+
+        private string GetThingsCountString()
+        {
+            return Things.Count.ToString();
+        }
+
         private void AddThings()
         {
-            Things.Add(new Book("Book-1", "001", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-2", "002", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-3", "003", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-4", "004", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-5", "005", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-6", "006", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-7", "007", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-8", "008", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-9", "009", "ASTRO Things", "Carmela Manalo", 200));
-            Things.Add(new Book("Book-10", "0010", "ASTRO Things", "Carmela Manalo", 200));
-
-            Things.Add(new Souvenir("Souvenir-1", "0001", "Model 1", Souvenir.MaterialType.Plastic, "Philippines"));
-            Things.Add(new Souvenir("Souvenir-2", "0002", "Model 2", Souvenir.MaterialType.Wood, "Singapore"));
-            Things.Add(new Souvenir("Souvenir-3", "0003", "Model 3", Souvenir.MaterialType.Wood, "Thailand"));
-            Things.Add(new Souvenir("Souvenir-4", "0004", "Model 4", Souvenir.MaterialType.Steel, "Philippines"));
-            Things.Add(new Souvenir("Souvenir-5", "0005", "Model 5", Souvenir.MaterialType.Steel, "Japan"));
-            Things.Add(new Souvenir("Souvenir-6", "0006", "Model 6", Souvenir.MaterialType.Plastic, "North Korea"));
-            Things.Add(new Souvenir("Souvenir-7", "0007", "Model 7", Souvenir.MaterialType.Plastic, "South Korea"));
-            Things.Add(new Souvenir("Souvenir-8", "0008", "Model 8", Souvenir.MaterialType.Wood, "Philippines"));
-            Things.Add(new Souvenir("Souvenir-9", "0009", "Model 9", Souvenir.MaterialType.Steel, "USA"));
-            Things.Add(new Souvenir("Souvenir-10", "00010", "Model 10", Souvenir.MaterialType.Plastic, "Philippines"));
-
-            Things.Add(new Jewelry("Jewelry-1", "0001", Jewelry.Rarity.Common, Jewelry.MaterialType.Bronze));
-            Things.Add(new Jewelry("Jewelry-2", "0002", Jewelry.Rarity.Rare, Jewelry.MaterialType.Bronze));
-            Things.Add(new Jewelry("Jewelry-3", "0003", Jewelry.Rarity.Unique, Jewelry.MaterialType.Bronze));
-            Things.Add(new Jewelry("Jewelry-4", "0004", Jewelry.Rarity.Rare, Jewelry.MaterialType.Silver));
-            Things.Add(new Jewelry("Jewelry-5", "0005", Jewelry.Rarity.Unique, Jewelry.MaterialType.Gold));
-            Things.Add(new Jewelry("Jewelry-6", "0006", Jewelry.Rarity.Common, Jewelry.MaterialType.Silver));
-            Things.Add(new Jewelry("Jewelry-7", "0007", Jewelry.Rarity.Common, Jewelry.MaterialType.Bronze));
-            Things.Add(new Jewelry("Jewelry-8", "0008", Jewelry.Rarity.Unique, Jewelry.MaterialType.Gold));
-            Things.Add(new Jewelry("Jewelry-9", "0009", Jewelry.Rarity.Rare, Jewelry.MaterialType.Bronze));
-            Things.Add(new Jewelry("Jewelry-10", "00010", Jewelry.Rarity.Common, Jewelry.MaterialType.Bronze));
+            for (int i = 0; i < 10; i++)
+            {
+                Things.Add(new Book("Book-"+i.ToString(), i.ToString(), "ASTRO Things", "Carmela Manalo", 200));
+                Things.Add(new Souvenir("Souvenir-"+i.ToString(), i.ToString(), "Model "+i.ToString(), Souvenir.MaterialType.Plastic, "Philippines"));
+                Things.Add(new Jewelry("Jewelry-"+i.ToString(), i.ToString(), Jewelry.Rarity.Common, Jewelry.MaterialType.Bronze));
+            }
         }
     }
 }
