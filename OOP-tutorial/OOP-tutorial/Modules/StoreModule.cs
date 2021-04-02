@@ -172,10 +172,6 @@ namespace OOP_tutorial.Modules
                 {
                     All = true;
                 }
-                if (!All)
-                {
-                    SwitchSortingAndGroupingFalse();
-                }
                 RaisePropertyChanged(nameof(DisplayThings));
             }
         }
@@ -377,7 +373,7 @@ namespace OOP_tutorial.Modules
                 }
             }
             SwitchSortingAndGroupingFalse();
-            NoFilter();
+            All = true;
         }
 
         #endregion
