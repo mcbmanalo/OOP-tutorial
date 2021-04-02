@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 D:\Personal\OOP-tutorial\OOP-tutorial\OOP-tutorial\App.xaml
-31496822549
+4918454175
 
-13818034880
+14233762198
 196304776068
-MainWindow.xaml;Views\StoreFrontView.xaml;Views\StoreView.xaml;
+MainWindow.xaml;Views\AddThingView.xaml;Views\StoreFrontView.xaml;Views\StoreView.xaml;
 
-True
+False
 

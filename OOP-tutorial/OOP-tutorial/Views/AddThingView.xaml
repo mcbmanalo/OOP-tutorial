@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="OOP_tutorial.Views.AddThingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OOP_tutorial.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding Path=StoreModule, Source={StaticResource Locator}}">
+    <Grid>
+        <StackPanel Margin="20">
+            <StackPanel>
+                <TextBlock Text="Type of Thing to Add"></TextBlock>
+                <ComboBox ItemsSource="{Binding Path=ThingTypes}"
+                          SelectedItem="{Binding Path=SelectedThingType}"></ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Name"></TextBlock>
+                <TextBox Text="{Binding Path=Name}"></TextBox>
+            </StackPanel>
+
+            <StackPanel x:Name="Book_Stack">
+                <StackPanel>
+                    <TextBlock Text="Title"></TextBlock>
+                    <TextBox Text="{Binding Path=Title}"></TextBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Author"></TextBlock>
+                    <TextBox Text="{Binding Path=Author}"></TextBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Number of Pages"></TextBlock>
+                    <TextBox Text="{Binding Path=NumberOfPages}"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel x:Name="Souvenir_Stack">
+                <StackPanel>
+                    <TextBlock Text="Model"></TextBlock>
+                    <TextBox Text="{Binding Path=Model}"></TextBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Material Type"></TextBlock>
+                    <ComboBox ItemsSource="{Binding Path=SMaterialTypes}"
+                          SelectedItem="{Binding Path=SelectedSMaterialTypes}"></ComboBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Country of Origin"></TextBlock>
+                    <TextBox Text="{Binding Path=OriginCountry}"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel x:Name="Jewelry_Stack">
+                <StackPanel>
+                    <TextBlock Text="Rarity"></TextBlock>
+                    <ComboBox ItemsSource="{Binding Path=Rarities}"
+                          SelectedItem="{Binding Path=SelectedRarities}"></ComboBox>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Material Type"></TextBlock>
+                    <ComboBox ItemsSource="{Binding Path=JMaterialTypes}"
+                          SelectedItem="{Binding Path=SelectedJMaterialTypes}"></ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
