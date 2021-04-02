@@ -219,11 +219,8 @@ namespace OOP_tutorial.Modules
             Jewelry
         }
 
-        private string GetThingsCountString()
-        {
-            return Things.Count.ToString();
-        }
-
+        #region Public Functions
+        
         public void AddThing()
         {
             if (SelectedThingType == "Book")
@@ -266,30 +263,8 @@ namespace OOP_tutorial.Modules
                 }
             }
         }
-
-        private void NoFilter()
-        {
-            FilteredThings = Things;
-            RaisePropertyChanged(nameof(FilteredThings));
-        }
-
-        private void FilterByBook()
-        {
-            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Book>());
-            RaisePropertyChanged(nameof(FilteredThings));
-        }
-
-        private void FilterBySouvenir()
-        {
-            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Souvenir>());
-            RaisePropertyChanged(nameof(FilteredThings));
-        }
-
-        private void FilterByJewelry()
-        {
-            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Jewelry>());
-            RaisePropertyChanged(nameof(FilteredThings));
-        }
+        
+        #endregion
 
         #region Private Functions
 
@@ -327,6 +302,35 @@ namespace OOP_tutorial.Modules
             SelectedRarities = null;
             SelectedJMaterialTypes = null;
             SelectedThingType = null;
+        }
+
+        private string GetThingsCountString()
+        {
+            return Things.Count.ToString();
+        }
+
+        private void NoFilter()
+        {
+            FilteredThings = Things;
+            RaisePropertyChanged(nameof(FilteredThings));
+        }
+
+        private void FilterByBook()
+        {
+            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Book>());
+            RaisePropertyChanged(nameof(FilteredThings));
+        }
+
+        private void FilterBySouvenir()
+        {
+            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Souvenir>());
+            RaisePropertyChanged(nameof(FilteredThings));
+        }
+
+        private void FilterByJewelry()
+        {
+            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Jewelry>());
+            RaisePropertyChanged(nameof(FilteredThings));
         }
 
         private void AddThings()
