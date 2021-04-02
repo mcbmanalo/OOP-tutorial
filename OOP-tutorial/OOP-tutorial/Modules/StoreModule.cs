@@ -47,6 +47,7 @@ namespace OOP_tutorial.Modules
         private bool _souvenir;
         private bool _jewelry;
         private string _searchThing;
+        private bool _isAscending;
         #endregion
 
         #region Properties
@@ -223,6 +224,17 @@ namespace OOP_tutorial.Modules
             }
         }
 
+        public bool IsAscending
+        {
+            get { return _isAscending; }
+            set
+            {
+                _isAscending = value;
+                RaisePropertyChanged(nameof(IsAscending));
+                SortAscend(_isAscending);
+            }
+        }
+
         #endregion
 
         private enum ThingType
@@ -230,19 +242,6 @@ namespace OOP_tutorial.Modules
             Book,
             Souvenir,
             Jewelry
-        }
-
-        private void FilterSearch(string stringFilter)
-        {
-            if (stringFilter != null)
-            {
-                DisplayThings = new ObservableCollection<Thing>(FilteredThings.Where(
-                s => (s.Name.Contains(stringFilter) || s.Value.ToString().Contains(stringFilter))));
-            } else
-            {
-                DisplayThings = FilteredThings;
-            }
-            RaisePropertyChanged(nameof(DisplayThings));
         }
 
         #region Public Functions
@@ -291,6 +290,20 @@ namespace OOP_tutorial.Modules
         }
         
         #endregion
+
+        private void SortAscend(bool ascend)
+        {
+            if (ascend)
+            {
+                var temp = FilteredThings;
+                DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderBy(s => s.Name));
+            } else
+            {
+                var temp = FilteredThings;
+                DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderByDescending(s => s.Name));
+            }
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
 
         #region Private Functions
 
@@ -363,6 +376,20 @@ namespace OOP_tutorial.Modules
             FilteredThings = new ObservableCollection<Thing>(Things.OfType<Jewelry>());
             DisplayThings = FilteredThings;
             RaisePropertyChanged(nameof(FilteredThings));
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void FilterSearch(string stringFilter)
+        {
+            if (stringFilter != null)
+            {
+                DisplayThings = new ObservableCollection<Thing>(FilteredThings.Where(
+                s => (s.Name.Contains(stringFilter) || s.Value.ToString().Contains(stringFilter))));
+            }
+            else
+            {
+                DisplayThings = FilteredThings;
+            }
             RaisePropertyChanged(nameof(DisplayThings));
         }
 
