@@ -6,7 +6,7 @@ namespace OOP_tutorial.Classes
 {
     public class Jewelry : Thing
     {
-        public Jewelry(string name, string itemId, Rarity rarity, MaterialType materialType) 
+        public Jewelry(string name, string itemId, string rarity, string materialType) 
         {
             Name = name;
             ItemId = "J-" + itemId;
@@ -15,10 +15,10 @@ namespace OOP_tutorial.Classes
             Value = getMaterialValue(materialType) * getRarityValue(rarity);
         }
 
-        private Rarity _rarity;
-        private MaterialType _jMaterialType;
+        private string _rarity;
+        private string _jMaterialType;
 
-        public Rarity JRarity
+        public string JRarity
         {
             get
             {
@@ -30,7 +30,7 @@ namespace OOP_tutorial.Classes
             }
         }
 
-        public MaterialType JMaterialType
+        public string JMaterialType
         {
             get
             {
@@ -56,24 +56,24 @@ namespace OOP_tutorial.Classes
             Gold = 5000
         }
 
-        private double getRarityValue(Rarity rarity)
+        private double getRarityValue(string rarity)
         {
-            if (rarity == Rarity.Common)
+            if (rarity == Rarity.Common.ToString())
                 return 1.5;
-            else if (rarity == Rarity.Rare)
+            else if (rarity == Rarity.Rare.ToString())
                 return 2.0;
-            else if (rarity == Rarity.Unique)
+            else if (rarity == Rarity.Unique.ToString())
                 return 3.5;
             return 0;
         }
 
-        private double getMaterialValue(MaterialType materialType)
+        private double getMaterialValue(string materialType)
         {
-            if (materialType == MaterialType.Bronze)
+            if (materialType == MaterialType.Bronze.ToString())
                 return (double)MaterialType.Bronze;
-            else if (materialType == MaterialType.Silver)
+            else if (materialType == MaterialType.Silver.ToString())
                 return (double)MaterialType.Silver;
-            else if (materialType == MaterialType.Gold)
+            else if (materialType == MaterialType.Gold.ToString())
                 return (double)MaterialType.Gold;
             return 0;
         }

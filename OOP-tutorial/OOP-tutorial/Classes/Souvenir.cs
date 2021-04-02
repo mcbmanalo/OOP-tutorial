@@ -6,7 +6,7 @@ namespace OOP_tutorial.Classes
 {
     public class Souvenir : Thing
     {
-        public Souvenir(string name, string itemId, string model, MaterialType materialType, string countryOfOrigin) 
+        public Souvenir(string name, string itemId, string model, string materialType, string countryOfOrigin) 
         {
             Name = name;
             ItemId = "S-" + itemId;
@@ -17,7 +17,7 @@ namespace OOP_tutorial.Classes
         }
 
         private string _model;
-        private MaterialType _materialType;
+        private string _materialType;
         private string _countryOfOrigin;
         
         public string Model
@@ -32,7 +32,7 @@ namespace OOP_tutorial.Classes
             }
         }
 
-        public MaterialType SMaterialType
+        public string SMaterialType
         {
             get
             {
@@ -63,13 +63,13 @@ namespace OOP_tutorial.Classes
             Steel = 300
         }
 
-        private double getMaterialValue (MaterialType materialType)
+        private double getMaterialValue (string materialType)
         {
-            if (materialType == MaterialType.Plastic)
+            if (materialType == MaterialType.Plastic.ToString())
                 return (double)MaterialType.Plastic;
-            else if (materialType == MaterialType.Wood)
+            else if (materialType == MaterialType.Wood.ToString())
                 return (double)MaterialType.Wood;
-            else if (materialType == MaterialType.Steel)
+            else if (materialType == MaterialType.Steel.ToString())
                 return (double)MaterialType.Steel;
             return 0;
         }
