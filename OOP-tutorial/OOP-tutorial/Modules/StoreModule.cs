@@ -16,9 +16,137 @@ namespace OOP_tutorial.Modules
             AddThings();
         }
 
+        public string[] ThingTypes => Enum.GetNames(typeof(ThingType));
+        public string[] SMaterialTypes => Enum.GetNames(typeof(Souvenir.MaterialType));
+        public string[] Rarities => Enum.GetNames(typeof(Jewelry.Rarity));
+        public string[] JMaterialTypes => Enum.GetNames(typeof(Jewelry.MaterialType));
+
+        private string _selectedThingType;
+        private string _selectedSMaterialTypes;
+        private string _selectedRarities;
+        private string _selectedJMaterialTypes;
+        private string _name;
+        private string _title;
+        private string _author;
+        private int _numberOfPages;
+        private string _model;
+        private string _originCountry;
+
+        public string SelectedThingType
+        {
+            get { return _selectedThingType; }
+            set
+            {
+                _selectedThingType = value;
+                RaisePropertyChanged(nameof(SelectedThingType));
+            }
+        }
+
+        public string SelectedSMaterialTypes
+        {
+            get { return _selectedSMaterialTypes; }
+            set
+            {
+                _selectedSMaterialTypes = value;
+                RaisePropertyChanged(nameof(SelectedSMaterialTypes));
+            }
+        }
+
+        public string SelectedRarities
+        {
+            get { return _selectedRarities; }
+            set
+            {
+                _selectedRarities = value;
+                RaisePropertyChanged(nameof(SelectedRarities));
+            }
+        }
+
+        public string SelectedJMaterialTypes
+        {
+            get { return _selectedJMaterialTypes; }
+            set
+            {
+                _selectedJMaterialTypes = value;
+                RaisePropertyChanged(nameof(SelectedJMaterialTypes));
+            }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                RaisePropertyChanged(nameof(Name));
+            }
+        }
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                RaisePropertyChanged(nameof(Title));
+            }
+        }
+
+        public string Author
+        {
+            get { return _author; }
+            set
+            {
+                _author = value;
+                RaisePropertyChanged(nameof(Author));
+            }
+        }
+
+        public int NumberOfPages
+        {
+            get { return _numberOfPages; }
+            set
+            {
+                _numberOfPages = value;
+                RaisePropertyChanged(nameof(NumberOfPages));
+            }
+        }
+
+        public string Model
+        {
+            get { return _model; }
+            set
+            {
+                _model = value;
+                RaisePropertyChanged(nameof(Model));
+            }
+        }
+
+        public string OriginCountry
+        {
+            get { return _originCountry; }
+            set
+            {
+                _originCountry = value;
+                RaisePropertyChanged(nameof(OriginCountry));
+            }
+        }
+
+        private enum ThingType
+        {
+            Book,
+            Souvenir,
+            Jewelry
+        }
+
+        private string GetThingsCountString()
+        {
+            return Things.Count.ToString();
+        }
+
         private void AddBook(string name, string title, string author, int numberOfPages)
         {
-            
+
             Book newBook = new Book(name, GetThingsCountString(), title, author, numberOfPages);
             Things.Add(newBook);
             RaisePropertyChanged(nameof(Things));
@@ -36,23 +164,6 @@ namespace OOP_tutorial.Modules
             Jewelry newJewelry = new Jewelry(name, GetThingsCountString(), rarity, materialType);
             Things.Add(newJewelry);
             RaisePropertyChanged(nameof(Things));
-        }
-
-        public string[] ThingTypes => Enum.GetNames(typeof(ThingType));
-        public string[] SMaterialTypes => Enum.GetNames(typeof(Souvenir.MaterialType));
-        public string[] Rarities => Enum.GetNames(typeof(Jewelry.Rarity));
-        public string[] JMaterialTypes => Enum.GetNames(typeof(Jewelry.MaterialType));
-
-        private enum ThingType
-        {
-            Book,
-            Souvenir,
-            Jewelry
-        }
-
-        private string GetThingsCountString()
-        {
-            return Things.Count.ToString();
         }
 
         private void AddThings()
