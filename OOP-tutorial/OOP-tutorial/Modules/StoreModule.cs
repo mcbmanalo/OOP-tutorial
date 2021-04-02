@@ -39,6 +39,9 @@ namespace OOP_tutorial.Modules
         }
 
         public string[] ThingTypes => Enum.GetNames(typeof(ThingType));
+        public string[] SMaterialTypes => Enum.GetNames(typeof(Souvenir.MaterialType));
+        public string[] Rarities => Enum.GetNames(typeof(Jewelry.Rarity));
+        public string[] JMaterialTypes => Enum.GetNames(typeof(Jewelry.MaterialType));
 
         private enum ThingType
         {
