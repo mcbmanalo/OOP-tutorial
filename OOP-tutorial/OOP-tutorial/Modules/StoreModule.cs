@@ -167,12 +167,12 @@ namespace OOP_tutorial.Modules
                 {
                     { BookFilter = false; SouvenirFilter = false; JewelryFilter = false; }
                     DisplayThings = ApplySortingAndGrouping(ApplyFiltering(Things));
+                    CheckFilterSearch();
                 }
                 if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
                 {
                     All = true;
                 }
-                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -187,12 +187,12 @@ namespace OOP_tutorial.Modules
                 {
                     { All = false; SouvenirFilter = false; JewelryFilter = false; }
                     DisplayThings = ApplySortingAndGrouping(ApplyFiltering(Things));
+                    CheckFilterSearch();
                 }
                 if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
                 {
                     BookFilter = true;
                 }
-                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -207,12 +207,12 @@ namespace OOP_tutorial.Modules
                 {
                     { All = false; BookFilter = false; JewelryFilter = false; }
                     DisplayThings = ApplySortingAndGrouping(ApplyFiltering(Things));
+                    CheckFilterSearch();
                 }
                 if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
                 {
                     SouvenirFilter = true;
                 }
-                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -227,12 +227,12 @@ namespace OOP_tutorial.Modules
                 {
                     { All = false; BookFilter = false; SouvenirFilter = false; }
                     DisplayThings = ApplySortingAndGrouping(ApplyFiltering(Things));
+                    CheckFilterSearch();
                 }
                 if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
                 {
                     JewelryFilter = true;
                 }
-                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -255,6 +255,7 @@ namespace OOP_tutorial.Modules
                 _isAscending = value;
                 RaisePropertyChanged(nameof(IsAscending));
                 DisplayThings = ApplySortingAndGrouping(FilteredThings);
+                CheckFilterSearch();
                 RaisePropertyChanged(nameof(DisplayThings));
             }
         }
@@ -269,6 +270,7 @@ namespace OOP_tutorial.Modules
                 if (IsGroupByName)
                 {
                     DisplayThings = ApplySortingAndGrouping(FilteredThings);
+                    CheckFilterSearch();
                     RaisePropertyChanged(nameof(DisplayThings));
                     IsGroupByItemId = false;
                     IsGroupByValue = false;
@@ -286,6 +288,7 @@ namespace OOP_tutorial.Modules
                 if (IsGroupByItemId)
                 {
                     DisplayThings = ApplySortingAndGrouping(FilteredThings);
+                    CheckFilterSearch();
                     RaisePropertyChanged(nameof(DisplayThings));
                     IsGroupByName = false;
                     IsGroupByValue = false;
@@ -303,6 +306,7 @@ namespace OOP_tutorial.Modules
                 if (IsGroupByValue)
                 {
                     DisplayThings = ApplySortingAndGrouping(FilteredThings);
+                    CheckFilterSearch();
                     RaisePropertyChanged(nameof(DisplayThings));
                     IsGroupByItemId = false;
                     IsGroupByName = false;
@@ -447,6 +451,20 @@ namespace OOP_tutorial.Modules
             {
                 DisplayThings = new ObservableCollection<Thing>(SortedThings.Where(
                 s => (s.Name.Contains(stringFilter) || s.ItemId.Contains(stringFilter) ||s.Value.ToString().Contains(stringFilter))));
+            }
+            else
+            {
+                DisplayThings = SortedThings;
+            }
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void CheckFilterSearch()
+        {
+            if (SearchThing != null)
+            {
+                DisplayThings = new ObservableCollection<Thing>(SortedThings.Where(
+                s => (s.Name.Contains(SearchThing) || s.ItemId.Contains(SearchThing) || s.Value.ToString().Contains(SearchThing))));
             }
             else
             {
