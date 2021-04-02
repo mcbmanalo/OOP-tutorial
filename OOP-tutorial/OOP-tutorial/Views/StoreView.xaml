@@ -38,10 +38,23 @@
                 <CheckBox Content="Jewelry" 
                           Margin="10,0"
                           IsChecked="{Binding Path=JewelryFilter, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
                 <CheckBox Content="Sort to Ascend"
                           Margin="10,0"
                           IsChecked="{Binding Path=IsAscending, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                <CheckBox Content="Group by Name"
+                          Margin="10,0"
+                          IsChecked="{Binding Path=IsGroupByName, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                <CheckBox Content="Group by ItemId"
+                          Margin="10,0"
+                          IsChecked="{Binding Path=IsGroupByItemId, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                <CheckBox Content="Group by Value"
+                          Margin="10,0"
+                          IsChecked="{Binding Path=IsGroupByValue, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
             </StackPanel>
+            
             <StackPanel>
                 <TextBlock Text="Search"></TextBlock>
                 <TextBox Text="{Binding Path=SearchThing, UpdateSourceTrigger=PropertyChanged}"></TextBox>
