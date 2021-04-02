@@ -40,7 +40,7 @@
                           IsChecked="{Binding Path=JewelryFilter, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Visibility="{Binding Path=All, Converter={StaticResource NullToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal">
                 <CheckBox Content="Sort to Ascend"
                           Margin="10,0"
                           IsChecked="{Binding Path=IsAscending, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
