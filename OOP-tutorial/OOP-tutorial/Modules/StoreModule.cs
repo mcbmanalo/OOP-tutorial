@@ -15,11 +15,12 @@ namespace OOP_tutorial.Modules
     {
         private ObservableCollection<Thing> Things { get; } = new ObservableCollection<Thing>();
         public ObservableCollection<Thing> FilteredThings { get; set; } = new ObservableCollection<Thing>();
+        public ObservableCollection<Thing> DisplayThings { get; set; } = new ObservableCollection<Thing>();
 
         public StoreModule()
         {
             AddThings();
-            FilteredThings = Things;
+            DisplayThings = Things;
             All = true;
         }
 
@@ -45,6 +46,7 @@ namespace OOP_tutorial.Modules
         private bool _book;
         private bool _souvenir;
         private bool _jewelry;
+        private string _searchThing;
         #endregion
 
         #region Properties
@@ -210,6 +212,17 @@ namespace OOP_tutorial.Modules
             }
         }
 
+        public string SearchThing
+        {
+            get { return _searchThing; }
+            set
+            {
+                _searchThing = value;
+                RaisePropertyChanged(nameof(SearchThing));
+                FilterSearch(SearchThing);
+            }
+        }
+
         #endregion
 
         private enum ThingType
@@ -219,8 +232,21 @@ namespace OOP_tutorial.Modules
             Jewelry
         }
 
+        private void FilterSearch(string stringFilter)
+        {
+            if (stringFilter != null)
+            {
+                DisplayThings = new ObservableCollection<Thing>(FilteredThings.Where(
+                s => (s.Name.Contains(stringFilter) || s.Value.ToString().Contains(stringFilter))));
+            } else
+            {
+                DisplayThings = FilteredThings;
+            }
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
         #region Public Functions
-        
+
         public void AddThing()
         {
             if (SelectedThingType == "Book")
@@ -312,25 +338,32 @@ namespace OOP_tutorial.Modules
         private void NoFilter()
         {
             FilteredThings = Things;
-            RaisePropertyChanged(nameof(FilteredThings));
+            DisplayThings = Things;
+            RaisePropertyChanged(nameof(DisplayThings));
         }
 
         private void FilterByBook()
         {
             FilteredThings = new ObservableCollection<Thing>(Things.OfType<Book>());
+            DisplayThings = FilteredThings;
             RaisePropertyChanged(nameof(FilteredThings));
+            RaisePropertyChanged(nameof(DisplayThings));
         }
 
         private void FilterBySouvenir()
         {
             FilteredThings = new ObservableCollection<Thing>(Things.OfType<Souvenir>());
+            DisplayThings = FilteredThings;
             RaisePropertyChanged(nameof(FilteredThings));
+            RaisePropertyChanged(nameof(DisplayThings));
         }
 
         private void FilterByJewelry()
         {
             FilteredThings = new ObservableCollection<Thing>(Things.OfType<Jewelry>());
+            DisplayThings = FilteredThings;
             RaisePropertyChanged(nameof(FilteredThings));
+            RaisePropertyChanged(nameof(DisplayThings));
         }
 
         private void AddThings()

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OOP_tutorial.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="550" d:DesignWidth="800"
              DataContext="{Binding Path=StoreModule, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,13 +39,17 @@
                           Margin="10,0"
                           IsChecked="{Binding Path=JewelryFilter, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
             </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Search"></TextBlock>
+                <TextBox Text="{Binding Path=SearchThing, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
         </StackPanel>
         
         <ListBox Grid.Row="1"
                  Grid.Column="0"
                  Grid.RowSpan="4"
                  Margin="10"
-                 ItemsSource="{Binding Path=FilteredThings, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged">
+                 ItemsSource="{Binding Path=DisplayThings, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Name}"></TextBlock>
