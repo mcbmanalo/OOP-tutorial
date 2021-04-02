@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Text;
 using OOP_tutorial.Classes;
 using System.Windows;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace OOP_tutorial.Modules
 {
@@ -21,6 +23,8 @@ namespace OOP_tutorial.Modules
         public string[] SMaterialTypes => Enum.GetNames(typeof(Souvenir.MaterialType));
         public string[] Rarities => Enum.GetNames(typeof(Jewelry.Rarity));
         public string[] JMaterialTypes => Enum.GetNames(typeof(Jewelry.MaterialType));
+
+        public ICommand AddThingCommand => new RelayCommand(AddThing);
 
         private string _selectedThingType;
         private string _selectedSMaterialTypes;
@@ -166,7 +170,7 @@ namespace OOP_tutorial.Modules
                 {
                     AddSouvenir(Name, Model, SelectedSMaterialTypes, OriginCountry);
                     ClearProperties();
-                    MessageBox.Show("Succesfully added Book.");
+                    MessageBox.Show("Succesfully added Souvenir.");
                 }
                 else
                 {
@@ -174,7 +178,18 @@ namespace OOP_tutorial.Modules
                 }
             }
             else if (SelectedThingType == "Jewelry")
-            { }
+            {
+                if (Name != null && SelectedRarities != null && SelectedJMaterialTypes != null)
+                {
+                    AddJewelry(Name, SelectedRarities, SelectedJMaterialTypes);
+                    ClearProperties();
+                    MessageBox.Show("Succesfully added Jewelry.");
+                }
+                else
+                {
+                    MessageBox.Show("There are some missing values. Please check if your values.");
+                }
+            }
         }
 
         private void AddBook(string name, string title, string author, int numberOfPages)
