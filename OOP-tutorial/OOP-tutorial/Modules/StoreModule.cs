@@ -169,6 +169,10 @@ namespace OOP_tutorial.Modules
                     { BookFilter = false; SouvenirFilter = false; JewelryFilter = false; }
                     NoFilter();
                 }
+                if(!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
+                {
+                    All = true;
+                }
             }
         }
 
@@ -183,6 +187,10 @@ namespace OOP_tutorial.Modules
                 {
                     { All = false; SouvenirFilter = false; JewelryFilter = false; }
                     FilterByBook();
+                }
+                if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
+                {
+                    BookFilter = true;
                 }
             }
         }
@@ -199,6 +207,10 @@ namespace OOP_tutorial.Modules
                     { All = false; BookFilter = false; JewelryFilter = false; }
                     FilterBySouvenir();
                 }
+                if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
+                {
+                    SouvenirFilter = true;
+                }
             }
         }
 
@@ -214,7 +226,11 @@ namespace OOP_tutorial.Modules
                     { All = false; BookFilter = false; SouvenirFilter = false; }
                     FilterByJewelry();
                 }
-                
+                if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
+                {
+                    JewelryFilter = true;
+                }
+
             }
         }
 
