@@ -38,6 +38,9 @@
                 <CheckBox Content="Jewelry" 
                           Margin="10,0"
                           IsChecked="{Binding Path=JewelryFilter, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                <CheckBox Content="Sort to Ascend"
+                          Margin="10,0"
+                          IsChecked="{Binding Path=IsAscending, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Search"></TextBlock>
