@@ -21,8 +21,6 @@ namespace OOP_tutorial.Modules
         public StoreModule()
         {
             AddThings();
-            DisplayThings = Things;
-            SortedThings = Things;
             All = true;
         }
 
@@ -168,16 +166,17 @@ namespace OOP_tutorial.Modules
                 if (_all)
                 {
                     { BookFilter = false; SouvenirFilter = false; JewelryFilter = false; }
-                    NoFilter();
+                    DisplayThings = ApplySortingAndGrouping(ApplyFiltering(Things));
                 }
-                if(!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
+                if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
                 {
                     All = true;
                 }
-                if(!All)
+                if (!All)
                 {
                     SwitchSortingAndGroupingFalse();
                 }
+                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -191,12 +190,13 @@ namespace OOP_tutorial.Modules
                 if (_book)
                 {
                     { All = false; SouvenirFilter = false; JewelryFilter = false; }
-                    FilterByBook();
+                    DisplayThings = ApplySortingAndGrouping(ApplyFiltering(Things));
                 }
                 if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
                 {
                     BookFilter = true;
                 }
+                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -210,12 +210,13 @@ namespace OOP_tutorial.Modules
                 if (_souvenir)
                 {
                     { All = false; BookFilter = false; JewelryFilter = false; }
-                    FilterBySouvenir();
+                    DisplayThings = ApplySortingAndGrouping(ApplyFiltering(Things));
                 }
                 if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
                 {
                     SouvenirFilter = true;
                 }
+                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -229,13 +230,13 @@ namespace OOP_tutorial.Modules
                 if (_jewelry)
                 {
                     { All = false; BookFilter = false; SouvenirFilter = false; }
-                    FilterByJewelry();
+                    DisplayThings = ApplySortingAndGrouping(ApplyFiltering(Things));
                 }
                 if (!All && !BookFilter && !SouvenirFilter && !JewelryFilter)
                 {
                     JewelryFilter = true;
                 }
-
+                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -257,7 +258,8 @@ namespace OOP_tutorial.Modules
             {
                 _isAscending = value;
                 RaisePropertyChanged(nameof(IsAscending));
-                SortAscend(_isAscending);
+                DisplayThings = ApplySortingAndGrouping(FilteredThings);
+                RaisePropertyChanged(nameof(DisplayThings));
             }
         }
 
@@ -270,7 +272,8 @@ namespace OOP_tutorial.Modules
                 RaisePropertyChanged(nameof(IsGroupByName));
                 if (IsGroupByName)
                 {
-                    GroupByName();
+                    DisplayThings = ApplySortingAndGrouping(FilteredThings);
+                    RaisePropertyChanged(nameof(DisplayThings));
                     IsGroupByItemId = false;
                     IsGroupByValue = false;
                 }
@@ -286,7 +289,8 @@ namespace OOP_tutorial.Modules
                 RaisePropertyChanged(nameof(IsGroupByItemId));
                 if (IsGroupByItemId)
                 {
-                    GroupByItemId();
+                    DisplayThings = ApplySortingAndGrouping(FilteredThings);
+                    RaisePropertyChanged(nameof(DisplayThings));
                     IsGroupByName = false;
                     IsGroupByValue = false;
                 }
@@ -302,7 +306,8 @@ namespace OOP_tutorial.Modules
                 RaisePropertyChanged(nameof(IsGroupByValue));
                 if (IsGroupByValue)
                 {
-                    GroupByValue();
+                    DisplayThings = ApplySortingAndGrouping(FilteredThings);
+                    RaisePropertyChanged(nameof(DisplayThings));
                     IsGroupByItemId = false;
                     IsGroupByName = false;
                 }
@@ -333,8 +338,8 @@ namespace OOP_tutorial.Modules
         public void AddThing()
         {
             if (SelectedThingType == "Book")
-            { 
-                if (Name!= null && Title != null && Author != null && NumberOfPages != 0)
+            {
+                if (Name != null && Title != null && Author != null && NumberOfPages != 0)
                 {
                     AddBook(Name, Title, Author, NumberOfPages);
                     ClearProperties();
@@ -371,8 +376,8 @@ namespace OOP_tutorial.Modules
                     MessageBox.Show("There are some missing values. Please check if your values.");
                 }
             }
+            SwitchSortingAndGroupingFalse();
             NoFilter();
-            All = true;
         }
 
         #endregion
@@ -460,7 +465,7 @@ namespace OOP_tutorial.Modules
         }
 
         private ObservableCollection<Thing> SortDescend(ObservableCollection<Thing> things)
-        { 
+        {
             return new ObservableCollection<Thing>(things.OrderByDescending(s => s.Name));
         }
 
@@ -487,13 +492,31 @@ namespace OOP_tutorial.Modules
             IsGroupByValue = false;
         }
 
-        private void ApplySortingAndGrouping(ObservableCollection<Thing> collectionOfThings)
+        private ObservableCollection<Thing> ApplySortingAndGrouping(ObservableCollection<Thing> collectionOfThings)
         {
-            if (IsGroupByName) { SortedThings = GroupByName(collectionOfThings); }
-            if(IsGroupByItemId) { SortedThings = GroupByItemId(collectionOfThings); }
-            if(IsGroupByValue) { SortedThings = GroupByValue(collectionOfThings); }
-            if (IsAscending) { SortedThings = SortAscend(SortedThings); }
-            if(!IsAscending) { SortedThings = SortDescend(SortedThings); }
+            if (IsGroupByName || IsGroupByItemId || IsGroupByValue)
+            {
+                if (IsGroupByName) { SortedThings = GroupByName(collectionOfThings); }
+                if (IsGroupByItemId) { SortedThings = GroupByItemId(collectionOfThings); }
+                if (IsGroupByValue) { SortedThings = GroupByValue(collectionOfThings); }
+                if (IsAscending) { SortedThings = SortAscend(SortedThings); }
+                if (!IsAscending) { SortedThings = SortDescend(SortedThings); }
+            } else
+            {
+                if (IsAscending) { SortedThings = SortAscend(collectionOfThings); }
+                if (!IsAscending) { SortedThings = SortDescend(collectionOfThings); }
+            }
+            
+            return SortedThings;
+        }
+
+        private ObservableCollection<Thing> ApplyFiltering(ObservableCollection<Thing> collectionOfThings)
+        {
+            if(All) { FilteredThings = NoFilter(); }
+            if(BookFilter) { FilteredThings = FilterByBook(collectionOfThings); }
+            if(SouvenirFilter) { FilteredThings = FilterBySouvenir(collectionOfThings); }
+            if(JewelryFilter) { FilteredThings = FilterByJewelry(collectionOfThings); }
+            return FilteredThings;
         }
 
         private void AddThings()
