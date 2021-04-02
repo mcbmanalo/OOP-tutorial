@@ -13,7 +13,7 @@ namespace OOP_tutorial.Modules
 
         public StoreModule()
         {
-            
+            AddThings();
         }
 
         private void AddThings()
