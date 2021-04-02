@@ -7,16 +7,20 @@ using OOP_tutorial.Classes;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using System.Linq;
 
 namespace OOP_tutorial.Modules
 {
     public class StoreModule : ObservableObject
     {
-        public ObservableCollection<Thing> Things { get; } = new ObservableCollection<Thing>();
+        private ObservableCollection<Thing> Things { get; } = new ObservableCollection<Thing>();
+        public ObservableCollection<Thing> FilteredThings { get; set; } = new ObservableCollection<Thing>();
 
         public StoreModule()
         {
             AddThings();
+            FilteredThings = Things;
+            All = true;
         }
 
         public string[] ThingTypes => Enum.GetNames(typeof(ThingType));
@@ -153,37 +157,56 @@ namespace OOP_tutorial.Modules
                 _all = value;
                 RaisePropertyChanged(nameof(All));
                 if (_all)
-                { Book = false; Souvenir = false; Jewelry = false; }
+                {
+                    { BookFilter = false; SouvenirFilter = false; JewelryFilter = false; }
+                    NoFilter();
+                }
             }
         }
 
-        public bool Book
+        public bool BookFilter
         {
             get { return _book; }
             set
             {
                 _book = value;
-                RaisePropertyChanged(nameof(Book));
+                RaisePropertyChanged(nameof(BookFilter));
+                if (_book)
+                {
+                    { All = false; SouvenirFilter = false; JewelryFilter = false; }
+                    FilterByBook();
+                }
             }
         }
 
-        public bool Souvenir
+        public bool SouvenirFilter
         {
             get { return _souvenir; }
             set
             {
                 _souvenir = value;
-                RaisePropertyChanged(nameof(Souvenir));
+                RaisePropertyChanged(nameof(SouvenirFilter));
+                if (_souvenir)
+                {
+                    { All = false; BookFilter = false; JewelryFilter = false; }
+                    FilterBySouvenir();
+                }
             }
         }
 
-        public bool Jewelry
+        public bool JewelryFilter
         {
             get { return _jewelry; }
             set
             {
                 _jewelry = value;
-                RaisePropertyChanged(nameof(Jewelry));
+                RaisePropertyChanged(nameof(JewelryFilter));
+                if (_jewelry)
+                {
+                    { All = false; BookFilter = false; SouvenirFilter = false; }
+                    FilterByJewelry();
+                }
+                
             }
         }
 
@@ -244,6 +267,32 @@ namespace OOP_tutorial.Modules
             }
         }
 
+        private void NoFilter()
+        {
+            FilteredThings = Things;
+            RaisePropertyChanged(nameof(FilteredThings));
+        }
+
+        private void FilterByBook()
+        {
+            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Book>());
+            RaisePropertyChanged(nameof(FilteredThings));
+        }
+
+        private void FilterBySouvenir()
+        {
+            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Souvenir>());
+            RaisePropertyChanged(nameof(FilteredThings));
+        }
+
+        private void FilterByJewelry()
+        {
+            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Jewelry>());
+            RaisePropertyChanged(nameof(FilteredThings));
+        }
+
+        #region Private Functions
+
         private void AddBook(string name, string title, string author, int numberOfPages)
         {
 
@@ -289,5 +338,7 @@ namespace OOP_tutorial.Modules
                 Things.Add(new Jewelry("Jewelry-"+i.ToString(), i.ToString(), Jewelry.Rarity.Common.ToString(), Jewelry.MaterialType.Bronze.ToString()));
             }
         }
+
+        #endregion
     }
 }
