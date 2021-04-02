@@ -377,7 +377,6 @@ namespace OOP_tutorial.Modules
 
         #endregion
 
-
         #region Private Functions
 
         private void AddBook(string name, string title, string author, int numberOfPages)
@@ -471,13 +470,13 @@ namespace OOP_tutorial.Modules
         {
             if (ascend)
             {
-                var temp = Things;
+                var temp = SortedThings;
                 SortedThings = new ObservableCollection<Thing>(temp.OrderBy(s => s.Name));
                 DisplayThings = SortedThings;
             }
             else
             {
-                var temp = Things;
+                var temp = SortedThings;
                 SortedThings = new ObservableCollection<Thing>(temp.OrderByDescending(s => s.Name));
                 DisplayThings = SortedThings;
             }
