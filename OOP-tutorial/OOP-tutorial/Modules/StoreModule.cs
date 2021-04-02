@@ -340,30 +340,12 @@ namespace OOP_tutorial.Modules
                     MessageBox.Show("There are some missing values. Please check if your values.");
                 }
             }
+            NoFilter();
         }
 
         #endregion
 
-        private void GroupByName()
-        {
-            var temp = SortedThings;
-            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.Name).SelectMany(t => t).ToList());
-            RaisePropertyChanged(nameof(DisplayThings));
-        }
 
-        private void GroupByValue()
-        {
-            var temp = SortedThings;
-            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.Value).SelectMany(t => t).ToList());
-            RaisePropertyChanged(nameof(DisplayThings));
-        }
-
-        private void GroupByItemId()
-        {
-            var temp = SortedThings;
-            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.ItemId).SelectMany(t => t).ToList());
-            RaisePropertyChanged(nameof(DisplayThings));
-        }
 
         #region Private Functions
 
@@ -411,6 +393,7 @@ namespace OOP_tutorial.Modules
         private void NoFilter()
         {
             FilteredThings = Things;
+            SortedThings = Things;
             DisplayThings = Things;
             RaisePropertyChanged(nameof(DisplayThings));
         }
@@ -457,14 +440,37 @@ namespace OOP_tutorial.Modules
         {
             if (ascend)
             {
-                var temp = SortedThings;
-                DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderBy(s => s.Name));
+                var temp = Things;
+                SortedThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderBy(s => s.Name));
+                DisplayThings = SortedThings;
             }
             else
             {
-                var temp = SortedThings;
-                DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderByDescending(s => s.Name));
+                var temp = Things;
+                SortedThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderByDescending(s => s.Name));
+                DisplayThings = SortedThings;
             }
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void GroupByName()
+        {
+            var temp = SortedThings;
+            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.Name).SelectMany(t => t).ToList());
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void GroupByValue()
+        {
+            var temp = SortedThings;
+            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.Value).SelectMany(t => t).ToList());
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void GroupByItemId()
+        {
+            var temp = SortedThings;
+            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.ItemId).SelectMany(t => t).ToList());
             RaisePropertyChanged(nameof(DisplayThings));
         }
 
