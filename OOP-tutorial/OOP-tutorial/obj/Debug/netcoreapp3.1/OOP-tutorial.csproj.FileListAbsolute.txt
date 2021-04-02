@@ -26,3 +26,5 @@ D:\Personal\OOP-tutorial\OOP-tutorial\OOP-tutorial\obj\Debug\netcoreapp3.1\OOP-t
 D:\Personal\OOP-tutorial\OOP-tutorial\OOP-tutorial\obj\Debug\netcoreapp3.1\OOP-tutorial.dll
 D:\Personal\OOP-tutorial\OOP-tutorial\OOP-tutorial\obj\Debug\netcoreapp3.1\OOP-tutorial.pdb
 D:\Personal\OOP-tutorial\OOP-tutorial\OOP-tutorial\obj\Debug\netcoreapp3.1\OOP-tutorial.genruntimeconfig.cache
+D:\Personal\OOP-tutorial\OOP-tutorial\OOP-tutorial\obj\Debug\netcoreapp3.1\Views\StoreView.g.cs
+D:\Personal\OOP-tutorial\OOP-tutorial\OOP-tutorial\obj\Debug\netcoreapp3.1\Views\StoreView.baml
