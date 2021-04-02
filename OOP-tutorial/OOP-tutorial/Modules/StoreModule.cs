@@ -420,36 +420,24 @@ namespace OOP_tutorial.Modules
             return Things.Count.ToString();
         }
 
-        private void NoFilter()
+        private ObservableCollection<Thing> NoFilter()
         {
-            FilteredThings = Things;
-            SortedThings = Things;
-            DisplayThings = Things;
-            RaisePropertyChanged(nameof(DisplayThings));
+            return Things;
         }
 
-        private void FilterByBook()
+        private ObservableCollection<Thing> FilterByBook(ObservableCollection<Thing> things)
         {
-            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Book>());
-            DisplayThings = FilteredThings;
-            RaisePropertyChanged(nameof(FilteredThings));
-            RaisePropertyChanged(nameof(DisplayThings));
+            return new ObservableCollection<Thing>(things.OfType<Book>());
         }
 
-        private void FilterBySouvenir()
+        private ObservableCollection<Thing> FilterBySouvenir(ObservableCollection<Thing> things)
         {
-            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Souvenir>());
-            DisplayThings = FilteredThings;
-            RaisePropertyChanged(nameof(FilteredThings));
-            RaisePropertyChanged(nameof(DisplayThings));
+            return new ObservableCollection<Thing>(things.OfType<Souvenir>());
         }
 
-        private void FilterByJewelry()
+        private ObservableCollection<Thing> FilterByJewelry(ObservableCollection<Thing> things)
         {
-            FilteredThings = new ObservableCollection<Thing>(Things.OfType<Jewelry>());
-            DisplayThings = FilteredThings;
-            RaisePropertyChanged(nameof(FilteredThings));
-            RaisePropertyChanged(nameof(DisplayThings));
+            return new ObservableCollection<Thing>(things.OfType<Jewelry>());
         }
 
         private void FilterSearch(string stringFilter)
@@ -466,42 +454,29 @@ namespace OOP_tutorial.Modules
             RaisePropertyChanged(nameof(DisplayThings));
         }
 
-        private void SortAscend(bool ascend)
+        private ObservableCollection<Thing> SortAscend(ObservableCollection<Thing> things)
         {
-            if (ascend)
-            {
-                var temp = SortedThings;
-                SortedThings = new ObservableCollection<Thing>(temp.OrderBy(s => s.Name));
-                DisplayThings = SortedThings;
-            }
-            else
-            {
-                var temp = SortedThings;
-                SortedThings = new ObservableCollection<Thing>(temp.OrderByDescending(s => s.Name));
-                DisplayThings = SortedThings;
-            }
-            RaisePropertyChanged(nameof(DisplayThings));
+            return new ObservableCollection<Thing>(things.OrderBy(s => s.Name));
         }
 
-        private void GroupByName()
-        {
-            var temp = SortedThings;
-            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.Name).SelectMany(t => t).ToList());
-            RaisePropertyChanged(nameof(DisplayThings));
+        private ObservableCollection<Thing> SortDescend(ObservableCollection<Thing> things)
+        { 
+            return new ObservableCollection<Thing>(things.OrderByDescending(s => s.Name));
         }
 
-        private void GroupByValue()
+        private ObservableCollection<Thing> GroupByName(ObservableCollection<Thing> things)
         {
-            var temp = SortedThings;
-            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.Value).SelectMany(t => t).ToList());
-            RaisePropertyChanged(nameof(DisplayThings));
+            return new ObservableCollection<Thing>(things.GroupBy(s => s.Name).SelectMany(t => t));
         }
 
-        private void GroupByItemId()
+        private ObservableCollection<Thing> GroupByValue(ObservableCollection<Thing> things)
         {
-            var temp = SortedThings;
-            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.ItemId).SelectMany(t => t).ToList());
-            RaisePropertyChanged(nameof(DisplayThings));
+            return new ObservableCollection<Thing>(things.GroupBy(s => s.Value).SelectMany(t => t));
+        }
+
+        private ObservableCollection<Thing> GroupByItemId(ObservableCollection<Thing> things)
+        {
+            return new ObservableCollection<Thing>(things.GroupBy(s => s.ItemId).SelectMany(t => t).ToList());
         }
 
         private void SwitchSortingAndGroupingFalse()
@@ -510,6 +485,15 @@ namespace OOP_tutorial.Modules
             IsGroupByItemId = false;
             IsGroupByName = false;
             IsGroupByValue = false;
+        }
+
+        private void ApplySortingAndGrouping(ObservableCollection<Thing> collectionOfThings)
+        {
+            if (IsGroupByName) { SortedThings = GroupByName(collectionOfThings); }
+            if(IsGroupByItemId) { SortedThings = GroupByItemId(collectionOfThings); }
+            if(IsGroupByValue) { SortedThings = GroupByValue(collectionOfThings); }
+            if (IsAscending) { SortedThings = SortAscend(SortedThings); }
+            if(!IsAscending) { SortedThings = SortDescend(SortedThings); }
         }
 
         private void AddThings()
