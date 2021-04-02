@@ -361,6 +361,7 @@ namespace OOP_tutorial.Modules
                 }
             }
             NoFilter();
+            All = true;
         }
 
         #endregion
