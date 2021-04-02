@@ -291,20 +291,6 @@ namespace OOP_tutorial.Modules
         
         #endregion
 
-        private void SortAscend(bool ascend)
-        {
-            if (ascend)
-            {
-                var temp = FilteredThings;
-                DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderBy(s => s.Name));
-            } else
-            {
-                var temp = FilteredThings;
-                DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderByDescending(s => s.Name));
-            }
-            RaisePropertyChanged(nameof(DisplayThings));
-        }
-
         #region Private Functions
 
         private void AddBook(string name, string title, string author, int numberOfPages)
@@ -389,6 +375,21 @@ namespace OOP_tutorial.Modules
             else
             {
                 DisplayThings = FilteredThings;
+            }
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void SortAscend(bool ascend)
+        {
+            if (ascend)
+            {
+                var temp = FilteredThings;
+                DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderBy(s => s.Name));
+            }
+            else
+            {
+                var temp = FilteredThings;
+                DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderByDescending(s => s.Name));
             }
             RaisePropertyChanged(nameof(DisplayThings));
         }
