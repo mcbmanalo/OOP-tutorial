@@ -14,13 +14,15 @@ namespace OOP_tutorial.Modules
     public class StoreModule : ObservableObject
     {
         private ObservableCollection<Thing> Things { get; } = new ObservableCollection<Thing>();
-        public ObservableCollection<Thing> FilteredThings { get; set; } = new ObservableCollection<Thing>();
+        private ObservableCollection<Thing> FilteredThings { get; set; } = new ObservableCollection<Thing>();
+        private ObservableCollection<Thing> SortedThings { get; set; } = new ObservableCollection<Thing>();
         public ObservableCollection<Thing> DisplayThings { get; set; } = new ObservableCollection<Thing>();
 
         public StoreModule()
         {
             AddThings();
             DisplayThings = Things;
+            SortedThings = Things;
             All = true;
         }
 
@@ -48,6 +50,9 @@ namespace OOP_tutorial.Modules
         private bool _jewelry;
         private string _searchThing;
         private bool _isAscending;
+        private bool _groupByName;
+        private bool _groupByItemId;
+        private bool _groupByValue;
         #endregion
 
         #region Properties
@@ -235,6 +240,54 @@ namespace OOP_tutorial.Modules
             }
         }
 
+        public bool IsGroupByName
+        {
+            get { return _groupByName; }
+            set
+            {
+                _groupByName = value;
+                RaisePropertyChanged(nameof(IsGroupByName));
+                if (IsGroupByName)
+                {
+                    GroupByName();
+                    IsGroupByItemId = false;
+                    IsGroupByValue = false;
+                }
+            }
+        }
+
+        public bool IsGroupByItemId
+        {
+            get { return _groupByItemId; }
+            set
+            {
+                _groupByItemId = value;
+                RaisePropertyChanged(nameof(IsGroupByItemId));
+                if (IsGroupByItemId)
+                {
+                    GroupByItemId();
+                    IsGroupByName = false;
+                    IsGroupByValue = false;
+                }
+            }
+        }
+
+        public bool IsGroupByValue
+        {
+            get { return _groupByValue; }
+            set
+            {
+                _groupByValue = value;
+                RaisePropertyChanged(nameof(IsGroupByValue));
+                if (IsGroupByValue)
+                {
+                    GroupByValue();
+                    IsGroupByItemId = false;
+                    IsGroupByName = false;
+                }
+            }
+        }
+
         #endregion
 
         private enum ThingType
@@ -288,8 +341,29 @@ namespace OOP_tutorial.Modules
                 }
             }
         }
-        
+
         #endregion
+
+        private void GroupByName()
+        {
+            var temp = SortedThings;
+            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.Name).SelectMany(t => t).ToList());
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void GroupByValue()
+        {
+            var temp = SortedThings;
+            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.Value).SelectMany(t => t).ToList());
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
+
+        private void GroupByItemId()
+        {
+            var temp = SortedThings;
+            DisplayThings = new ObservableCollection<Thing>(temp.GroupBy(s => s.ItemId).SelectMany(t => t).ToList());
+            RaisePropertyChanged(nameof(DisplayThings));
+        }
 
         #region Private Functions
 
@@ -383,12 +457,12 @@ namespace OOP_tutorial.Modules
         {
             if (ascend)
             {
-                var temp = FilteredThings;
+                var temp = SortedThings;
                 DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderBy(s => s.Name));
             }
             else
             {
-                var temp = FilteredThings;
+                var temp = SortedThings;
                 DisplayThings = new ObservableCollection<Thing>((IEnumerable<Thing>)temp.OrderByDescending(s => s.Name));
             }
             RaisePropertyChanged(nameof(DisplayThings));
